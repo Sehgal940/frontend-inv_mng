@@ -44,7 +44,7 @@ function Home() {
   })
 
   const [details,setDetails]=useState([])
-  const [load,setLoad]=useState('')
+  const [load,setLoad]=useState(false)
   //functions
   const loadData=async()=>{
    setDetails(await records())
@@ -149,7 +149,8 @@ function Home() {
     const file = e.target.files[0];
     const fd=new FormData()
     fd.append('file',file)
-    setLoad(await compare(fd))
+    const data=await compare(fd)
+    if(data==='done')setLoad(!load)
   }
 
 return (
